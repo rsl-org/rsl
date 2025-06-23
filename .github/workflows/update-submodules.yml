@@ -81,10 +81,10 @@ jobs:
 
       - name: Push changes
         if: steps.process.outputs.updated == '1'
-        uses: EndBug/add-and-commit@v9
-        with:
-          push: true
-
+        env:
+          GH_TOKEN: ${{ secrets.UPDATE_TOKEN }}
+        run: |
+          git push https://x-access-token:${GH_TOKEN}@github.com/<owner>/<meta-repo>.git HEAD:master
 
       - name: No updates detected
         if: steps.process.outputs.updated != '1'
