@@ -13,4 +13,4 @@ jobs:
         with:
           workflow: update-submodules.yml
           repo: tsche/re
-          token: ${{ secrets.UPDATE_TRIGGER_TOKEN }}
+          token: "${{ secrets.UPDATE_TRIGGER_TOKEN }}"
