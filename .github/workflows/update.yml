@@ -21,7 +21,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "tsche@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re.git
+          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/rsl-org/rsl.git
 
       - name: Pull from rsl::test
         run: |
