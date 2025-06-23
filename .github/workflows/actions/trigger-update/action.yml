@@ -1,18 +1,17 @@
 name: Trigger Meta Repo Update
 
 on:
-  push:
-    branches:
-      - master
+  workflow_call:
+
 
 jobs:
-  trigger-meta:
+  trigger:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger meta repo update workflow
         uses: peter-evans/workflow-dispatch@v1
         with:
           token: ${{ secrets.UPDATE_TRIGGER_TOKEN }}
-          repository: <meta-owner>/<meta-repo>
+          repository: tsche/re
           workflow: update-submodules.yml
           ref: master
