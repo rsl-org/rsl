@@ -41,44 +41,49 @@ jobs:
         run: |
           echo "[] " > commits.json
           updated=0
+
+          # Set bot identity
+          git config user.name "Meta Bot"
+          git config user.email "bot@users.noreply.github.com"
+
           while IFS='=' read -r subpath lastsha; do
             echo "Processing $subpath, last recorded sha $lastsha"
+
             # Get new commits in submodule master after last recorded sha
             mapfile -t new_commits < <(git -C "$subpath" rev-list --reverse --ancestry-path $lastsha..origin/master 2>/dev/null || true)
             if [ ${#new_commits[@]} -eq 0 ]; then
               echo "No new commits in $subpath"
               continue
             fi
+
             for commit_sha in "${new_commits[@]}"; do
               echo "New commit $commit_sha in $subpath"
+
               # Update submodule pointer to that commit
-              git submodule update --remote -- "$subpath"
               git -C "$subpath" fetch origin master
               git -C "$subpath" checkout "$commit_sha"
 
               # Get commit info
-              author_name=$(git -C "$subpath" show -s --format='%an' $commit_sha)
-              author_email=$(git -C "$subpath" show -s --format='%ae' $commit_sha)
-              author_date=$(git -C "$subpath" show -s --format='%aI' $commit_sha)
-              commit_msg=$(git -C "$subpath" show -s --format='%B' $commit_sha)
+              author_name=$(git -C "$subpath" show -s --format='%an' "$commit_sha")
+              author_email=$(git -C "$subpath" show -s --format='%ae' "$commit_sha")
+              author_date=$(git -C "$subpath" show -s --format='%aI' "$commit_sha")
+              commit_msg=$(git -C "$subpath" show -s --format='%B' "$commit_sha")
 
-              # Update the submodule pointer to this commit
+              # Stage the updated submodule
               git add "$subpath"
 
-              # Commit spoofing original author
+              # Spoof author, but commit as bot
               GIT_AUTHOR_NAME="$author_name" \
               GIT_AUTHOR_EMAIL="$author_email" \
               GIT_AUTHOR_DATE="$author_date" \
-              GIT_COMMITTER_NAME="$author_name" \
-              GIT_COMMITTER_EMAIL="$author_email" \
-              GIT_COMMITTER_DATE="$author_date" \
-                git commit -m "$commit_msg"
+              git commit --author="$author_name <$author_email>" --date="$author_date" -m "$commit_msg"
 
               updated=1
             done
           done < submodules-shas.txt
 
-          echo "::set-output name=updated::$updated"
+          echo "updated=$updated" >> "$GITHUB_OUTPUT"
+
 
       - name: Push changes
         if: steps.process.outputs.updated == '1'
