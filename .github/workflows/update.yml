@@ -20,7 +20,7 @@ jobs:
       - name: Prepare environment
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "bot@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/rsl-org/rsl.git
 
       - name: Fetch latest submodule commits
