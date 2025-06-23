@@ -76,6 +76,9 @@ jobs:
 
           echo "::set-output name=updated::$updated"
 
+      - name: Set push remote with PAT
+        run: git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/${{ github.repository }}.git
+
       - name: Push changes
         if: steps.process.outputs.updated == '1'
         uses: EndBug/add-and-commit@v9
