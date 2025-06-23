@@ -1,0 +1,9 @@
+[submodule "util"]
+	path = util
+	url = git@github.com:rsl-org/util
+[submodule "config"]
+	path = config
+	url = git@github.com:rsl-org/config
+[submodule "test"]
+	path = test
+	url = git@github.com:rsl-org/test
