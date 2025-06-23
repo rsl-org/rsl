@@ -85,7 +85,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.UPDATE_TOKEN }}
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re
+          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re.git
           git push
 
       - name: No updates detected
