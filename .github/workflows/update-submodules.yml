@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout meta repo with submodules
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
@@ -21,78 +21,20 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "tsche@users.noreply.github.com"
-
-      - name: Fetch latest submodule commits
-        run: |
-          git submodule foreach --quiet 'git fetch origin master'
-
-      - name: Get last recorded commit for submodules in meta repo
-        id: last-sha
-        run: |
-          for sub in $(git config --file .gitmodules --get-regexp path | awk '{ print $2 }'); do
-            sha=$(git ls-tree HEAD $sub | awk '{ print $3 }')
-            echo "$sub=$sha"
-          done > submodules-shas.txt
-          cat submodules-shas.txt
-          echo "::set-output name=submodules::$(cat submodules-shas.txt | jq -R -s -c 'split("\n")[:-1] | map(split("=") | {(.[0]): .[1]}) | add')"
-
-      - name: Process submodules commits
-        id: process
-        run: |
-          echo "[] " > commits.json
-          updated=0
-
-          # Set bot identity
-          git config user.name "Meta Bot"
-          git config user.email "bot@users.noreply.github.com"
-
-          while IFS='=' read -r subpath lastsha; do
-            echo "Processing $subpath, last recorded sha $lastsha"
-
-            # Get new commits in submodule master after last recorded sha
-            mapfile -t new_commits < <(git -C "$subpath" rev-list --reverse --ancestry-path $lastsha..origin/master 2>/dev/null || true)
-            if [ ${#new_commits[@]} -eq 0 ]; then
-              echo "No new commits in $subpath"
-              continue
-            fi
-
-            for commit_sha in "${new_commits[@]}"; do
-              echo "New commit $commit_sha in $subpath"
-
-              # Update submodule pointer to that commit
-              git -C "$subpath" fetch origin master
-              git -C "$subpath" checkout "$commit_sha"
-
-              # Get commit info
-              author_name=$(git -C "$subpath" show -s --format='%an' "$commit_sha")
-              author_email=$(git -C "$subpath" show -s --format='%ae' "$commit_sha")
-              author_date=$(git -C "$subpath" show -s --format='%aI' "$commit_sha")
-              commit_msg=$(git -C "$subpath" show -s --format='%B' "$commit_sha")
-
-              # Stage the updated submodule
-              git add "$subpath"
-
-              # Spoof author, but commit as bot
-              GIT_AUTHOR_NAME="$author_name" \
-              GIT_AUTHOR_EMAIL="$author_email" \
-              GIT_AUTHOR_DATE="$author_date" \
-              git commit --author="$author_name <$author_email>" --date="$author_date" -m "$commit_msg"
-
-              updated=1
-            done
-          done < submodules-shas.txt
-
-          echo "updated=$updated" >> "$GITHUB_OUTPUT"
-
-
-      - name: Push changes
-        if: steps.process.outputs.updated == '1'
-        env:
-          GITHUB_TOKEN: ${{ secrets.UPDATE_TOKEN }}
-        run: |
           git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re.git
-          git push
 
-      - name: No updates detected
-        if: steps.process.outputs.updated != '1'
-        run: echo "No new submodule commits to update."
+      - name: Pull from retest
+        uses: actions/checkout@v4
+        run: |
+          git remote add retest https://github.com/tsche/retest.git
+          git fetch retest master
+          git subtree pull --prefix=test retest master
+          git push origin master
+
+      - name: Pull from refig
+        uses: actions/checkout@v4
+        run: |
+          git remote add refig https://github.com/tsche/refig.git
+          git fetch refig master
+          git subtree pull --prefix=config refig master
+          git push origin master
