@@ -3,6 +3,9 @@ name: Update Submodules
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-submodules:
     runs-on: ubuntu-latest
@@ -12,11 +15,12 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+          token: ${{ secrets.UPDATE_TOKEN }}
 
       - name: Prepare environment
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "meta-bot@pydong.org"
+          git config user.email "tsche@users.noreply.github.com"
 
       - name: Fetch latest submodule commits
         run: |
@@ -76,13 +80,12 @@ jobs:
 
           echo "::set-output name=updated::$updated"
 
-      - name: Set remote using PAT
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re
-
       - name: Push changes
         if: steps.process.outputs.updated == '1'
+        env:
+          GITHUB_TOKEN: ${{ secrets.UPDATE_TOKEN }}
         run: |
+          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re
           git push
 
       - name: No updates detected
