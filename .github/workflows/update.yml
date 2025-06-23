@@ -35,7 +35,8 @@ jobs:
             echo "$sub=$sha"
           done > submodules-shas.txt
           cat submodules-shas.txt
-          echo "::set-output name=submodules::$(cat submodules-shas.txt | jq -R -s -c 'split("\n")[:-1] | map(split("=") | {(.[0]): .[1]}) | add')"
+          submodules=$(cat submodules-shas.txt | jq -R -s -c 'split("\n")[:-1] | map(split("=") | {(.[0]): .[1]}) | add')
+          echo "submodules=$submodules" >> "$GITHUB_OUTPUT"
 
       - name: Process submodules commits
         id: process
