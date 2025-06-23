@@ -78,7 +78,7 @@ jobs:
 
       - name: Set remote using PAT
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re.git
+          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re
 
       - name: Push changes
         if: steps.process.outputs.updated == '1'
