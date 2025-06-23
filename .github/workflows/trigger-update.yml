@@ -11,6 +11,6 @@ jobs:
       - name: Trigger meta repo update workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: update-submodules.yml
+          workflow: update.yml
           repo: tsche/re
           token: "${{ secrets.UPDATE_TRIGGER_TOKEN }}"

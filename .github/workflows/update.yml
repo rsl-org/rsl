@@ -1,0 +1,46 @@
+name: Update Submodules
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout meta repo with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          token: ${{ secrets.UPDATE_TOKEN }}
+
+      - name: Prepare environment
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "tsche@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re.git
+
+      - name: Pull from rsl::test
+        run: |
+          git remote add test https://github.com/rsl-org/test.git
+          git fetch test master
+          git subtree pull --prefix=test test master
+
+      - name: Pull from rsl::config
+        run: |
+          git remote add config https://github.com/rsl-org/config.git
+          git fetch config master
+          git subtree pull --prefix=config config master
+
+      - name: Pull from rsl::util
+        run: |
+          git remote add util https://github.com/rsl-org/util.git
+          git fetch util master
+          git subtree pull --prefix=util util master
+      
+      - name: Push changes
+        run: |
+          git push origin master
