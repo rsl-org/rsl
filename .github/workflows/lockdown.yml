@@ -15,3 +15,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: dessant/repo-lockdown@v4
+        with:
+          pr-comment: "This repository does not accept PRs. Open a PR in the respective subproject repository instead."
