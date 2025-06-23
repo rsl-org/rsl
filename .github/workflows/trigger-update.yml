@@ -12,5 +12,5 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: update.yml
-          repo: tsche/re
+          repo: rsl-org/rsl
           token: "${{ secrets.UPDATE_TRIGGER_TOKEN }}"
