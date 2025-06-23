@@ -9,9 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger meta repo update workflow
-        uses: peter-evans/workflow-dispatch@v1
+        uses: benc-uk/workflow-dispatch@v1
         with:
-          token: ${{ secrets.UPDATE_TRIGGER_TOKEN }}
-          repository: tsche/re
           workflow: update-submodules.yml
-          ref: master
+          repo: tsche/re
+          token: ${{ secrets.UPDATE_TRIGGER_TOKEN }}
