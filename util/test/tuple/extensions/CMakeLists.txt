@@ -1,1 +1,0 @@
-target_sources(rsl_test PRIVATE subscript.cpp)

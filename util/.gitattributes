@@ -1,4 +1,0 @@
-*.h linguist-language=c
-include/rsl/* linguist-language=cpp
-
-* text=auto eol=lf
