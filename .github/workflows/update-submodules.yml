@@ -24,7 +24,6 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re.git
 
       - name: Pull from retest
-        uses: actions/checkout@v4
         run: |
           git remote add retest https://github.com/tsche/retest.git
           git fetch retest master
@@ -32,7 +31,6 @@ jobs:
           git push origin master
 
       - name: Pull from refig
-        uses: actions/checkout@v4
         run: |
           git remote add refig https://github.com/tsche/refig.git
           git fetch refig master
