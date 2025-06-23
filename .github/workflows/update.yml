@@ -44,10 +44,6 @@ jobs:
           echo "[] " > commits.json
           updated=0
 
-          # Set bot identity
-          git config user.name "Meta Bot"
-          git config user.email "bot@users.noreply.github.com"
-
           while IFS='=' read -r subpath lastsha; do
             echo "Processing $subpath, last recorded sha $lastsha"
 
@@ -75,9 +71,10 @@ jobs:
               git add "$subpath"
 
               # Spoof author, but commit as bot
-              GIT_AUTHOR_NAME="$author_name" \
-              GIT_AUTHOR_EMAIL="$author_email" \
-              GIT_AUTHOR_DATE="$author_date" \
+              GIT_AUTHOR_NAME="$author_name"
+              GIT_AUTHOR_EMAIL="$author_email"
+              GIT_AUTHOR_DATE="$author_date"
+
               git commit --author="$author_name <$author_email>" --date="$author_date" -m "$commit_msg"
 
               updated=1
