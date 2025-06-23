@@ -1,6 +1,0 @@
-[submodule "retest"]
-	path = retest
-	url = git@github.com:tsche/retest
-[submodule "refig"]
-	path = refig
-	url = git@github.com:tsche/refig
