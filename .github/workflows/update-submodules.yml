@@ -76,15 +76,14 @@ jobs:
 
           echo "::set-output name=updated::$updated"
 
-      - name: Set push remote with PAT
-        run: git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/${{ github.repository }}.git
+      - name: Set remote using PAT
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.UPDATE_TOKEN }}@github.com/tsche/re.git
 
       - name: Push changes
         if: steps.process.outputs.updated == '1'
-        env:
-          GH_TOKEN: ${{ secrets.UPDATE_TOKEN }}
         run: |
-          git push https://x-access-token:${GH_TOKEN}@github.com/<owner>/<meta-repo>.git HEAD:master
+          git push
 
       - name: No updates detected
         if: steps.process.outputs.updated != '1'
