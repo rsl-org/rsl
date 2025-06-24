@@ -7,9 +7,6 @@
 [submodule "test"]
 	path = projects/test
 	url = git@github.com:rsl-org/test
-[submodule "doc"]
-	path = projects/doc
-	url = git@github.com:rsl-org/doc
 [submodule "project-template"]
 	path = project-template
 	url = git@github.com:rsl-org/project-template
