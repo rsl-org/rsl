@@ -10,3 +10,6 @@
 [submodule "project-template"]
 	path = project-template
 	url = git@github.com:rsl-org/project-template
+[submodule "projects/doc"]
+	path = projects/doc
+	url = git@github.com:rsl-org/doc
