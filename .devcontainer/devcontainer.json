@@ -2,7 +2,28 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/cpp
 {
 	"name": "C++26 Fedora",
-	"image": "ghcr.io/rsl-org/fedora_devcontainer:latest"
+	"image": "ghcr.io/rsl-org/fedora_devcontainer:latest",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-themes",
+				"ms-python.debugpy",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.vscode-python-envs",
+				"ms-python.isort",
+				"ms-python.mypy-type-checker",
+				"ms-python.autopep8",
+				"ms-vscode.cmake-tools",
+				"llvm-vs-code-extensions.vscode-clangd",
+				"matepek.vscode-catch2-test-adapter",
+				"Gruntfuggly.todo-tree",
+				"xaver.clang-format"
+			]
+		}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
