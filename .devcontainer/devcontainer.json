@@ -20,7 +20,8 @@
 				"llvm-vs-code-extensions.vscode-clangd",
 				"matepek.vscode-catch2-test-adapter",
 				"Gruntfuggly.todo-tree",
-				"xaver.clang-format"
+				"xaver.clang-format",
+				"BlueGlassBlock.better-json5"
 			]
 		}
 	},
