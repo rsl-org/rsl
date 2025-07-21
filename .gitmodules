@@ -13,3 +13,9 @@
 [submodule "projects/assert"]
 	path = projects/assert
 	url = git@github.com:rsl-org/assert
+[submodule "projects/xml"]
+	path = projects/xml
+	url = git@github.com:rsl-org/xml
+[submodule "projects/json5"]
+	path = projects/json5
+	url = git@github.com:rsl-org/json5
