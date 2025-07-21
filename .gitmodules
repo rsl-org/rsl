@@ -16,6 +16,3 @@
 [submodule "projects/assert"]
 	path = projects/assert
 	url = git@github.com:rsl-org/assert
-[submodule "projects/lambda"]
-	path = projects/lambda
-	url = git@github.com:rsl-org/lambda
