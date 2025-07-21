@@ -8,7 +8,7 @@
 	path = projects/test
 	url = git@github.com:rsl-org/test
 [submodule "project-template"]
-	path = projects/project-template
+	path = template
 	url = git@github.com:rsl-org/project-template
 [submodule "projects/xml"]
 	path = projects/xml
