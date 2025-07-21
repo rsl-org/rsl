@@ -10,9 +10,6 @@
 [submodule "project-template"]
 	path = projects/project-template
 	url = git@github.com:rsl-org/project-template
-[submodule "projects/assert"]
-	path = projects/assert
-	url = git@github.com:rsl-org/assert
 [submodule "projects/xml"]
 	path = projects/xml
 	url = git@github.com:rsl-org/xml
