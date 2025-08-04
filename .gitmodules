@@ -19,3 +19,6 @@
 [submodule "conan"]
 	path = conan
 	url = git@github.com:rsl-org/conan-center-index
+[submodule "projects/kwargs"]
+	path = projects/kwargs
+	url = git@github.com:rsl-org/kwargs
