@@ -25,3 +25,9 @@
 [submodule "projects/log"]
 	path = projects/log
 	url = git@github.com:rsl-org/log
+[submodule "infra/conan"]
+	path = infra/conan
+	url = git@github.com:rsl-org/conan
+[submodule "infra/docker-p2996"]
+	path = infra/docker-p2996
+	url = git@github.com:rsl-org/docker-p2996
