@@ -16,9 +16,6 @@
 [submodule "projects/json5"]
 	path = projects/json5
 	url = git@github.com:rsl-org/json5
-[submodule "conan"]
-	path = conan
-	url = git@github.com:rsl-org/conan-center-index
 [submodule "projects/kwargs"]
 	path = projects/kwargs
 	url = git@github.com:rsl-org/kwargs
