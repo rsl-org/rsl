@@ -28,3 +28,6 @@
 [submodule "infra/docker-p2996"]
 	path = infra/docker-p2996
 	url = git@github.com:rsl-org/docker-p2996
+[submodule "extensions/vscode-test"]
+	path = extensions/vscode-test
+	url = git@github.com:rsl-org/vscode-test
