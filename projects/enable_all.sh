@@ -1,7 +1,7 @@
 #!/bin/bash
 
-for f in *; do
+for f in "$(dirname "$0")"/*; do
     if [ -d "$f" ]; then
-        conan editable add $f
+        conan editable add "$f"
     fi
 done

@@ -34,5 +34,6 @@
   },
 
   "onCreateCommand": "/setup_user.sh",
+	"postCreateCommand": "/workspaces/rsl/projects/enable_all.sh", 
 	"postAttachCommand": "exec su - $LOCAL_USER"
 }
