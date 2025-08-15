@@ -1,39 +1,50 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/cpp
 {
-	"name": "C++26 Fedora",
-	"image": "ghcr.io/rsl-org/fedora_devcontainer:latest",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-vscode.cpptools-extension-pack",
-				"ms-vscode.cpptools",
-				"ms-vscode.cpptools-themes",
-				"ms-python.debugpy",
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"ms-python.vscode-python-envs",
-				"ms-python.isort",
-				"ms-python.mypy-type-checker",
-				"ms-python.autopep8",
-				"ms-vscode.cmake-tools",
-				"llvm-vs-code-extensions.vscode-clangd",
-				"matepek.vscode-catch2-test-adapter",
-				"Gruntfuggly.todo-tree",
-				"xaver.clang-format",
-				"BlueGlassBlock.better-json5"
-			]
-		}
-	},
-
+  "name": "C++26 Fedora",
+  "image": "ghcr.io/rsl-org/fedora_devcontainer:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-themes",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.vscode-python-envs",
+        "ms-python.isort",
+        "ms-python.mypy-type-checker",
+        "ms-python.autopep8",
+        "ms-vscode.cmake-tools",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "matepek.vscode-catch2-test-adapter",
+        "Gruntfuggly.todo-tree",
+        "xaver.clang-format",
+        "BlueGlassBlock.better-json5"
+      ]
+    },
+    "settings": {
+      "editor.tabSize": 2,
+      "terminal.integrated.defaultProfile.linux": "zsh",
+      "terminal.integrated.profiles.linux": {
+        "zsh": {
+          "path": "zsh"
+        },
+        "tmux": {
+          "path": "tmux",
+          "icon": "terminal-tmux"
+        },
+      }
+    }
+  },
   "containerEnv": {
-		"LOCAL_USER": "${localEnv:USER}",
+    "LOCAL_USER": "${localEnv:USER}",
     "LOCAL_UID": "${localEnv:UID:1000}",
     "LOCAL_GID": "${localEnv:GID:1000}",
-		"LOCAL_HOME": "/workspaces"
+    "LOCAL_HOME": "/workspaces"
   },
-
   "onCreateCommand": "/setup_user.sh",
-	"postCreateCommand": "/workspaces/rsl/projects/enable_all.sh", 
-	"postAttachCommand": "exec su - $LOCAL_USER"
+  "postCreateCommand": "sudo -u $LOCAL_USER /workspaces/rsl/projects/enable_all.sh",
+  "postAttachCommand": "exec su - $LOCAL_USER"
 }
