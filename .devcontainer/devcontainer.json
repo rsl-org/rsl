@@ -46,5 +46,8 @@
   },
   "onCreateCommand": "/setup_user.sh",
   "postCreateCommand": "sudo -u $LOCAL_USER /workspaces/rsl/projects/enable_all.sh",
-  "postAttachCommand": "exec su - $LOCAL_USER"
+  "postAttachCommand": "exec su - $LOCAL_USER",
+  "mounts": [
+    "source=/run/systemd/journal/socket,target=/run/systemd/journal/socket,type=bind,consistency=delegated,readonly=false"
+  ]
 }
