@@ -31,3 +31,6 @@
 [submodule "extensions/vscode-test"]
 	path = extensions/vscode-test
 	url = git@github.com:rsl-org/vscode-test
+[submodule "projects/rpc"]
+	path = projects/rpc
+	url = git@github.com:rsl-org/rpc
