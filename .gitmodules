@@ -16,9 +16,6 @@
 [submodule "projects/json5"]
 	path = projects/json5
 	url = git@github.com:rsl-org/json5
-[submodule "projects/kwargs"]
-	path = projects/kwargs
-	url = git@github.com:rsl-org/kwargs
 [submodule "projects/log"]
 	path = projects/log
 	url = git@github.com:rsl-org/log
